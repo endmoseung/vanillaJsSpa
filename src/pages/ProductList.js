@@ -25,6 +25,7 @@ export default function ProductList({ $target }) {
   };
 
   fetchProducts();
+
   const productLists = new Products({
     $target: $page,
     initialState: this.state,
