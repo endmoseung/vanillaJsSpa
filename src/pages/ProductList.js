@@ -1,6 +1,5 @@
-import { request } from "../common/shoppingData";
-import Products from "../components/Products";
-import product from "../../product.json";
+import { request } from "../common/shoppingData.js";
+import Products from "../components/Products.js";
 
 export default function ProductList({ $target }) {
   const $page = document.createElement("div");
@@ -15,19 +14,14 @@ export default function ProductList({ $target }) {
     this.state = nextState;
   };
 
-  const fetchProducts = () => {
-    // const products = await request("/products");
-    const products = product;
-    console.log(products);
+  this.fetchProducts = async () => {
+    const products = await request("/dev/products");
     this.setState(products);
-    console.log(this.state);
-    return products;
+    const productLists = new Products({
+      $target: $page,
+      initialState: this.state,
+    });
   };
 
-  fetchProducts();
-
-  const productLists = new Products({
-    $target: $page,
-    initialState: this.state,
-  });
+  this.fetchProducts();
 }

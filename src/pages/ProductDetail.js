@@ -1,5 +1,5 @@
-import productDetailItem from "../../productDetail.json";
-import Details from "../components/Details";
+import Details from "../components/Details.js";
+import { request } from "../common/shoppingData.js";
 
 export default function ProductDetail({ $target, productId }) {
   this.state = {
@@ -22,22 +22,21 @@ export default function ProductDetail({ $target, productId }) {
       $target.innerHTML = "";
       $target.appendChild($page);
     }
-    new Details();
   };
 
-  this.fetchProduct = () => {
+  this.fetchProduct = async () => {
     const { productId } = this.state;
-    const product = productDetailItem;
+    const product = await request(`/dev/products/${productId}`);
     this.setState({
       ...this.state,
       product,
     });
+    console.log(this.state);
+    console.log($page);
+    const productDetails = new Details({
+      $target: $page,
+      initialState: this.state,
+    });
   };
-  console.log(this.state);
   this.fetchProduct();
-
-  const productDetails = new Details({
-    $target: $page,
-    initialState: this.state,
-  });
 }

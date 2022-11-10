@@ -1,13 +1,10 @@
-import { routeChange } from "../router";
+import { routeChange } from "../router.js";
 
 export default function Products({ $target, initialState }) {
-  console.log("hi");
   const $productList = document.createElement("ul");
   $target.appendChild($productList);
 
   this.state = initialState;
-
-  console.log($target, initialState);
 
   this.setState = (nextState) => {
     this.state = nextState;
