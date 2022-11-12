@@ -17,6 +17,7 @@ export default function ProductList({ $target }) {
   this.fetchProducts = async () => {
     const products = await request("/dev/products");
     this.setState(products);
+
     const productLists = new Products({
       $target: $page,
       initialState: this.state,
